@@ -17,7 +17,7 @@
         <div class="content">
             <div class="left">
                 <div class="title">
-                    <h1 class="happy">
+                    <h1 class="happy" style="font-size:46px;">
                         <span style="--t: 4s;">H</span>
                         <span style="--t: 4.2s;">a</span>
                         <span style="--t: 4.4s;">p</span>
@@ -29,12 +29,13 @@
                             </div>
                         </span>
                     </h1>
-                    <h1 class="birthday">
-                        <span style="--t: 5s;">B</span>
-                        <span style="--t: 5.2s;">i</span>
-                        <span style="--t: 5.4s;">r</span>
-                        <span style="--t: 5.6s;">t</span>
-                        <span style="--t: 5.8s;">h</span>
+                    <h1 class="birthday" style="font-size:46px;">
+
+                        <span style="--t: 5s;">W</span>
+                        <span style="--t: 5.2s;">o</span>
+                        <span style="--t: 5.4s;">m</span>
+                        <span style="--t: 5.6s;">a</span>
+                        <span style="--t: 5.8s;">n</span>
                         <span style="--t: 6s;">d</span>
                         <span style="--t: 6.2s;">a</span>
                         <span style="--t: 6.4s;">y</span>
@@ -58,7 +59,7 @@
                     </div>
                     <div class="name">
                         <i class="fa-solid fa-heart"></i>
-                        <span>Yenaiti</span>
+                        <span>Tuyết Phụng</span>
                         <i class="fa-solid fa-heart"></i>
                     </div>
                     <div class="balloon_one">
@@ -70,17 +71,17 @@
                 </div>
                 <div class="cricle">
                     <div class="text__cricle">
-                        <span style="--i: 1;">h</span>
+                        <span style="--i: 1;">H</span>
                         <span style="--i: 2;">a</span>
                         <span style="--i: 3;">p</span>
                         <span style="--i: 4;">p</span>
                         <span style="--i: 5;">y</span>
                         <span style="--i: 6;">-</span>
-                        <span style="--i: 7;">b</span>
-                        <span style="--i: 8;">i</span>
-                        <span style="--i: 9;">r</span>
-                        <span style="--i: 10;">t</span>
-                        <span style="--i: 11;">h</span>
+                        <span style="--i: 7;">w</span>
+                        <span style="--i: 8;">o</span>
+                        <span style="--i: 9;">m</span>
+                        <span style="--i: 10;">a</span>
+                        <span style="--i: 11;">n</span>
                         <span style="--i: 12;">d</span>
                         <span style="--i: 13;">a</span>
                         <span style="--i: 14;">y</span>
@@ -106,7 +107,7 @@
             <img width="20" src="./images/decorate_flower.png" alt="">
         </div>
         <div class="decorate_bottom">
-            <img src="./images/decorate.png" alt="" width="100">
+            <img src="./images/decorate.png" alt="" width="200">
         </div>
         <div class="smiley__icon">
             <img src="./images/smiley_icon.png" alt="" width="100">
@@ -146,8 +147,8 @@
     </div>
 </body>
 <script>
-    let datetxt = "10/10/2007";
-    let datatxtletter = "Happy birthday! Wishing you a day filled with joy, laughter, and wonderful memories 💕";
+    let datetxt = "20/10/2025";
+    let datatxtletter = "Happy Vietnamese Women's Day! Wishing you beauty, happiness, and success always 💐";
     let titleLetter = "Dear em :)))";
     let charArrDate = datetxt.split('');
     let charArrDateLetter = datatxtletter.split('');
@@ -211,10 +212,92 @@
                     currentIndexLetter++;
                 }
                 else{
-                    clearInterval(intervalContent)
+                    clearInterval(intervalContent);
+                    // Hiệu ứng mưa ảnh sau khi chữ chạy hết
+                    startImageRain();
                 }
             },50)
         },6000)
+
+    // Hàm tạo hiệu ứng mưa ảnh
+    function startImageRain() {
+        // Nếu đã có hiệu ứng thì không tạo lại
+        if (document.getElementById('image-rain-container')) return;
+        const rainContainer = document.createElement('div');
+        rainContainer.id = 'image-rain-container';
+        rainContainer.style.position = 'fixed';
+        rainContainer.style.left = '0';
+        rainContainer.style.top = '0';
+        rainContainer.style.width = '100vw';
+        rainContainer.style.height = '100vh';
+        rainContainer.style.pointerEvents = 'none';
+    rainContainer.style.zIndex = '10001';
+        document.body.appendChild(rainContainer);
+
+        const images = [
+           './images/baby1.png',
+            './images/baby2.png',
+            './images/baby3.png',
+            './images/baby4.png',
+            './images/baby5.png'
+        ];
+            const rainCount = 30;
+            const babyImages = [
+                './images/baby1.png',
+                './images/baby2.png',
+                './images/baby3.png',
+                './images/baby4.png',
+                './images/baby5.png'
+            ];
+            // Tạo mảng lưu vị trí left đã dùng để tránh dính nhau
+            let usedLefts = [];
+            const minGap = 1000; // khoảng cách tối thiểu giữa các ảnh (vw)
+            for (let i = 0; i < rainCount; i++) {
+                const img = document.createElement('img');
+                const src = images[Math.floor(Math.random() * images.length)];
+                img.src = src;
+                img.style.position = 'absolute';
+                img.style.width = (30 + Math.random() * 40) + 'px';
+                // Tìm vị trí left không bị quá gần ảnh khác
+                let left;
+                let tryCount = 0;
+                do {
+                    left = Math.random() * 95; // giữ trong 0-95vw
+                    tryCount++;
+                } while (usedLefts.some(l => Math.abs(l - left) < minGap) && tryCount < 30);
+                usedLefts.push(left);
+                img.style.left = left + 'vw';
+                img.style.top = '-60px';
+                img.style.opacity = 1;
+                img.style.pointerEvents = 'none';
+                img.style.transition = 'transform 0.2s';
+                // Chỉ hình baby mới có border trắng, KHÔNG bo tròn
+                if (babyImages.includes(src)) {
+                    img.style.border = '3px solid #fff';
+                }
+                rainContainer.appendChild(img);
+
+                // Animation rơi chậm hơn nữa
+                const duration = 22 + Math.random() * 6; // 22-28s
+                const delay = Math.random() * 2;
+                img.animate([
+                    { transform: `translateY(0)` },
+                    { transform: `translateY(${window.innerHeight + 100}px)` }
+                ], {
+                    duration: duration * 1000,
+                    delay: delay * 1000,
+                    easing: 'linear',
+                    fill: 'forwards'
+                });
+                setTimeout(() => {
+                    img.style.transform = `translateY(${window.innerHeight + 100}px)`;
+                }, (duration + delay) * 1000);
+            }
+        // Xóa hiệu ứng sau 30s (đủ thời gian rơi của tất cả ảnh)
+        setTimeout(() => {
+            rainContainer.remove();
+        }, 30000);
+    }
     })
     $(".close").on("click", function(){
         clearInterval(intervalContent)
